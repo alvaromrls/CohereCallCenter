@@ -1,15 +1,26 @@
 Source code for cohere Hackaton
 
-Set up the python libraries
-python3 -m venv myenv
-.\myenv\Scripts\Activate.ps1
-pip install -r requirements.txt
+## Instations
 
-To install whisper:
-https://github.com/openai/whisper
+- Set up the python libraries
 
-To install ffmpeg (in a windows computer):
-https://phoenixnap.com/kb/ffmpeg-windows
+> python3 -m venv myenv
+>
+> .\myenv\Scripts\Activate.ps1
+>
+> pip install -r requirements.txt
 
-Pyaudio reference:
-https://people.csail.mit.edu/hubert/pyaudio/docs/
+- To install whisper:
+
+> pip install git+https://github.com/openai/whisper.git
+
+- To install ffmpeg (in a windows computer):
+  https://phoenixnap.com/kb/ffmpeg-windows
+
+## References
+
+- Pyaudio reference:
+  https://people.csail.mit.edu/hubert/pyaudio/docs/
+
+- Whisper:
+  https://github.com/openai/whisper
