@@ -1,0 +1,3 @@
+cohere
+ffmpeg-python
+pyaudio
