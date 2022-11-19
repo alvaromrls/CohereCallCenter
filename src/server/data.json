@@ -1,1 +1,23 @@
-{}
+{
+  "metadata": {
+    "human_resources": [
+      "Hi! I have problems with my salary",
+      "Someone at work is insulting me"
+    ],
+    "cyber_sec": [
+      "I have clicked a fishing mail",
+      "My credentials doesn't work",
+      "I think Someone hacked me"
+    ],
+    "sales": [
+      "I want to buy a new product",
+      "Can Someone explain me the catalog and prices?"
+    ],
+    "IT_guy": [
+      "I can't connect to internet",
+      "My pc can't open an excel",
+      "Office problems"
+    ]
+  },
+  "logs": ["I'm trolling hard", "How much costs the car"]
+}
