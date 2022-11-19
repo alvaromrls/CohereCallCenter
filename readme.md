@@ -1,6 +1,8 @@
-Source code for cohere Hackaton
+# Cohere Hackaton: Call Center
 
-## Instations
+This the source code repository for cohere Hackaton. This solution detect voice and take a decision based on it.
+
+## Instation
 
 - Set up the python libraries
 
@@ -16,6 +18,27 @@ Source code for cohere Hackaton
 
 - To install ffmpeg (in a windows computer):
   https://phoenixnap.com/kb/ffmpeg-windows
+
+- Create a .env file in src/cli with the API key from codere
+
+## Execution
+
+1. Server: in a terminal
+
+   > cd src
+   >
+   > python server/app.py
+
+2. User: in a terminal
+
+   > cd src
+   >
+   > python cli/user
+
+3. Admin: in a terminal
+   > cd src
+   >
+   > python cli/admin
 
 ## References
 

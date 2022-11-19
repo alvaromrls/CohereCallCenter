@@ -30,7 +30,7 @@ class client:
 
     def printdata(self):
         print(f"Messages in the log {self.page_numbers[0]}-{self.page_numbers[-1]}: ")
-        ind = 0
+        ind = 1
         for i in self.page_numbers:
             print(f"{ind}: {self.data[i-1]}")
             ind += 1
