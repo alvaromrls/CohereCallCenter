@@ -1,8 +1,9 @@
 import requests
 import whisper
 import cohere
-import json
-from cohere.classify import Example
+import os
+from cohere.classify import Example, Classification
+from dotenv import load_dotenv
 
 newConversation = """Press:
 - S to start a new conversation
@@ -11,13 +12,34 @@ newConversation = """Press:
  """
 
 
+def call_it():
+    print("The IT guy is bussy, but he will call this number salet")
+
+
+def call_HR():
+    print("I will call a HR assistant")
+
+
+def call_sales():
+    print("Our sales team will support your request")
+
+
+def secury():
+    print("A cyber security expert will contact you")
+
+
+def troll():
+    print("Hahahaha you're very funny, but please this is a serious company ;)")
+
+
 class client:
     def __init__(self):
         self.filename = "temporal.wav"
         self.transcription = ""
-        f = open("user/config.json")
-        config = json.load(f)
-        key = config["cohereKey"]
+        # f = open("user/config.json")
+        # config = json.load(f)
+        load_dotenv()
+        key = os.getenv("KEY")
         self.co = cohere.Client(key)
         self.load_data()
         print("A new client has started")
@@ -88,7 +110,25 @@ class client:
             inputs=[self.transcription],
             examples=self.examples,
         )
-        print(response)
+        self.dispatch_action(response[0])
+        print(response[0])
+
+    def dispatch_action(self, action):
+        actions = {
+            "human_resources": call_HR,
+            "cyber_sec": secury,
+            "sales": call_sales,
+            "IT_guy": call_it,
+            "Trolling": troll,
+        }
+        pred = action.prediction
+        if action.confidence > 0.85:
+            actions[pred]()
+        else:
+            print("Wait a moment, I'm not sure what to do")
+            requests.post(
+                "http://localhost:5000/logs", data={"log": self.transcription}
+            )
 
     def loop(self):
         while True:

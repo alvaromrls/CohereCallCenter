@@ -7,11 +7,6 @@ con = connexion()
 print(f"Will run on {con.connexion_string()}")
 
 
-@app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
-
-
 @app.route("/metadata")
 def get_data():
     f = open("server/data.json")
@@ -35,6 +30,22 @@ def logs():
             json.dump(data, f)
             f.close()
         return "ok"
+
+
+@app.route("/logs/<int:id>", methods=["DELETE", "PATCH"])
+def admin(id):
+    f = open("server/data.json", "r")
+    data = json.load(f)
+    f.close()
+    if request.method == "DELETE":
+        try:
+            del data["logs"][id]
+            f = open("server/data.json", "w")
+            json.dump(data, f)
+            f.close()
+            return "ok"
+        except:
+            return "error"
 
 
 if __name__ == "__main__":
