@@ -18,6 +18,10 @@ whatToDoConversation = """--- OK, now press:
 class client:
     def __init__(self):
         self.get_data()
+        self.categories = list(
+            requests.get("http://localhost:5000/metadata").json().keys()
+        )
+        print(self.categories)
 
     def get_data(self):
         self.data = requests.get("http://localhost:5000/logs").json()
@@ -50,6 +54,13 @@ class client:
             else:
                 self.page_numbers = list(range(self.page * 5 + 1, self.total_data + 1))
 
+    def print_categories(self):
+        index = 1
+        print("------Select the cateogorie")
+        for cat in self.categories:
+            print(f"------{index}: {cat}")
+            index += 1
+
     def loop(self):
         while True:
             self.printdata()
@@ -61,9 +72,22 @@ class client:
             elif k in ["1", "2", "3", "4", "5"]:
                 option = input(whatToDoConversation).strip()
                 if option in ["D", "d"]:
-                    requests.delete(
-                        f"http://localhost:5000/logs/{self.page_numbers[int(k)-1]}"
-                    )
+                    print("Deleting items in the server ...")
+                    # requests.delete(
+                    print(f"http://localhost:5000/logs/{self.page_numbers[int(k)]-1}")
+                    # )
                     self.get_data()
+                elif option in ["A", "a"]:
+                    self.print_categories()
+                    try:
+                        categorie_index = input()
+                        categorie = self.categories[int(categorie_index) - 1]
+                        requests.patch(
+                            f"http://localhost:5000/logs/{self.page_numbers[int(k)]-1}",
+                            data={"category": categorie},
+                        )
+                        self.get_data()
+                    except:
+                        print("Ops.. something went wrong")
             else:
                 break

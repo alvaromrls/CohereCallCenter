@@ -1,10 +1,7 @@
 from flask import Flask, request
-from http_con import connexion
 import json
 
 app = Flask(__name__)
-con = connexion()
-print(f"Will run on {con.connexion_string()}")
 
 
 @app.route("/metadata")
@@ -46,7 +43,20 @@ def admin(id):
             return "ok"
         except:
             return "error"
+    else:
+        category = request.form.get("category")
+        if category:
+            try:
+                example = data["logs"][id]
+                f = open("server/data.json", "w")
+                data["metadata"][category].append(example)
+                del data["logs"][id]
+                json.dump(data, f)
+                f.close()
+                return "ok"
+            except Exception as err:
+                return str(err)
 
 
 if __name__ == "__main__":
-    app.run(host="localhost", port=con.PORT, debug=True)
+    app.run(host="localhost", port=5000, debug=True)
